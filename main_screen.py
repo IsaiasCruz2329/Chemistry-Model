@@ -51,17 +51,25 @@ class MainScreen:
         fontstyle_label_title_info = tkFont.Font(size=25)
         label_title_information = Label(frame_objects_info, text="Visualizador de moléculas", bg="white",
                                         font=fontstyle_label_title_info, width=32)
-        label_title_information.grid(row=0, column=0, sticky='we')
+        label_title_information.grid(row=0, column=0, sticky='we', pady=(30, 20))
 
         # add a label for the description of the function
         fontstyle_label_descrip_info = tkFont.Font(size=15)
         label_description_information = Label(frame_objects_info, text="Aquí va una descripcion", bg="white",
-                                              font=fontstyle_label_descrip_info, width=30)
-        label_description_information.grid(row=1, column=0, sticky="news")
+                                              font=fontstyle_label_descrip_info, width=30, justify=LEFT)
+        label_description_information.grid(row=1, column=0, sticky="news", pady=(10, 20))
 
         # add a button for use the function select
         button_use_function = Button(frame_objects_info, text="Usar", bg="white", width=10, height=2)
-        button_use_function.grid(row=2, column=0)
+        button_use_function.grid(row=2, column=0, pady=(200, 20))
+
+        # update buttons frames idle task to let tkinter calculate buttons sizes
+        frame_objects_info.update_idletasks()
+
+        frame_canvas_information.config(height=400)
+
+        # define the area of the scrollbar
+        canvas_information.config(scrollregion=canvas_information.bbox("all"))
 
         # ------------------------------------- block of functions  --------------------------------------
 
@@ -125,6 +133,9 @@ class MainScreen:
                     pass
             label_title_information.config(text=title)
             label_description_information.config(text=description)
+            frame_objects_info.update_idletasks()
+
+            canvas_information.config(scrollregion=canvas_information.bbox("all"))
 
         num_buttons = 5
         buttons_func = [Radiobutton() for i in range(num_buttons)]
